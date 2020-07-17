@@ -2,7 +2,15 @@
 
 > 基于Github-Actions的完美校园健康打卡
 
+## 你可以在此项目中学到的东西
 
+1、模拟器使用httpcanary抓包（其实还可以使用fiddle进行抓包）
+
+2、httpcanary的初步使用
+
+3、GitHub Actions自动化部署Python脚本
+
+4、......
 
 ## 复杂的食用方法
 
@@ -80,28 +88,77 @@
 
 #### 1、点击链接进入项目文件并fork到自己的GitHub上
 
+- 此项目地址：https://github.com/ReaJason/17wanxiaoCheckin-Actions
 
+- 点击右上角的fork即可将项目文件拉到自己的库中
 
+![](https://s1.ax1x.com/2020/07/18/UcncB4.png)
 
+![](https://s1.ax1x.com/2020/07/18/UcngHJ.png)
 
+#### 2、设置Secrets，输入项目运行的数据
 
+- 找到自己fork的库，点击Settings->Secrets->New sceret
 
+- 字段名使用大写，下面的值则填写自己的值，总共12个，细心填写这关乎之后的成功与否
 
+- ```
+  # 设置如下secret字段
+  """
+  TEXT(学院专业班级信息)                例：林学院-林学(陶铸实验班)-2017林学(陶铸实验班)1班
+  DEPTID(未知id字段)                   例：141670
+  ADDRESS(详细地址)                    例：非常富贵
+  ADDTEXT(省-市-县/区)                 例：江西省-南昌市-高新区
+  CODE(盲猜邮编)                       例：360192
+  STUNUM(学号)                        例：20170101
+  USERNAME(姓名)                      例：小冯
+  PHONENUM(电话)                      例：...自己电话...
+  USERID(完美校园分配的用户id)          例：6274894
+  EMERGENCY(紧急联系人)                例：紧急人
+  EMERGENCYPHONE(紧急联系人电话)        例：23667712771
+  SCKEY(Server酱微信推送)
+  """
+  ```
 
+![](https://s1.ax1x.com/2020/07/18/UcnWNR.png)
 
+![](https://s1.ax1x.com/2020/07/18/UcnRE9.png)
 
+![](https://s1.ax1x.com/2020/07/18/UcnIgK.png)
 
+#### 3、开启Actions
 
+- 找到自己fork的库，点击Settings->Action->I understand...
 
+- 回到项目主页，修改README.md触发Actions
 
+![](https://s1.ax1x.com/2020/07/18/Ucnx8P.png)
 
+![](https://s1.ax1x.com/2020/07/18/UcnHDe.png)
 
-### Actions具体流程
+![](https://s1.ax1x.com/2020/07/18/UcnbHH.png)
+
+![](https://s1.ax1x.com/2020/07/18/Ucn7uD.png)
+
+![](https://s1.ax1x.com/2020/07/18/UcuSv8.png)
+
+#### 4、查看结果
+
+- 通过Update README.md -- > build -- > HealthCheckin
+- 手机微信推送查看
+- 成功了一次之后则开启了自动化部署（每天早上六点自动打卡）
+- 如果失败，则在运行状况的HealthCheckin中查看报错情况，解决不了可以提issue
+
+![](https://s1.ax1x.com/2020/07/18/UcuCDg.png)
+
+<img src="https://s1.ax1x.com/2020/07/18/Ucu9KS.jpg" style="zoom:33%;" />
+
+### 四、Actions具体流程
 
 > Tips：actions配置文件在\.github\workflows\run.yml中
 >
 
-#### 0 参数设置(secret)
+#### 1、参数设置(secret)
 
 ```python
 # 设置如下secret字段
@@ -140,7 +197,7 @@ EOF
 """
 ```
 
-#### 1 计划时间参数
+#### 2、计划时间参数
 
 ```python
 schedule:
@@ -150,7 +207,7 @@ schedule:
 # 国际时与北京时的查询网站：http://www.timebie.com/cn/universalbeijing.php
 ```
 
-#### 2 Install Python
+#### 3、Install Python
 
 ```python
 # 为虚拟机安装python3环境
@@ -160,7 +217,7 @@ run: |
 # 由于使用的是Ubuntu的虚拟机，因此执行的是linux语句
 ```
 
-#### 3 Pip install requests
+#### 4、Pip install requests
 
 ```python
 # 为py程序的执行安装第三方库requests
@@ -168,46 +225,25 @@ run: |
     pip3 install requests -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-#### 4 HealthCheckin
+#### 5、HealthCheckin
 
 ```python
 # 运行py脚本文件
 run: |
-    python3 17wanxiao.py
+    python3 17wanxiao.py <<EOF
+    ${{secrets.TEXT}}
+    ${{secrets.DEPTID}}
+    ${{secrets.ADDRESS}}
+    ${{secrets.ADDTEXT}}
+    ${{secrets.CODE}}
+    ${{secrets.STUNUM}}
+    ${{secrets.USERNAME}}
+    ${{secrets.PHONENUM}}
+    ${{secrets.USERID}}
+    ${{secrets.EMERGENCY}}
+    ${{secrets.EMERGENCYPHONE}}
+    ${{secrets.SCKEY}}
+    EOF
 ```
 
-```python
-# json字段需要通过手机抓包健康打卡获取(能力有限，暂无其他办法)
-import requests
-
-base_url = "https://reportedh5.17wanxiao.com/sass/api/epmpics"
-
-json = {"businessType": "epmpics", "method": "submitUpInfo",
-        "jsonData": {"deptStr": {"deptid": {}, "text": "{学院-专业-班级}"},
-                     "areaStr": "{地址}",
-                     "reportdate": {时间戳*1000}, "customerid": "1999", "deptid": {}, "source": "alipay",
-                     "templateid": "pneumonia", "stuNo": "{学号}", "username": "{姓名}", "phonenum": "{电话号码}",
-                     "userid": "{独一无二的字段}", "updatainfo": [{"propertyname": "bodyzk", "value": "正常温度(小于37.3)"},
-                                                          {"propertyname": "istouchcb", "value": "自己家中"},
-                                                          {"propertyname": "sfwz2", "value": "内地学生"},
-                                                          {"propertyname": "symptom", "value": "无"},
-                                                          {"propertyname": "homehealth", "value": "无"},
-                                                          {"propertyname": "isConfirmed", "value": "无"},
-                                                          {"propertyname": "ownbodyzk", "value": "良好"},
-                                                          {"propertyname": "ishborwh", "value": "无"},
-                                                          {"propertyname": "outdoor", "value": "绿色"},
-                                                          {"propertyname": "isContactFriendIn14", "value": "没有"},
-                                                          {"propertyname": "ownPhone", "value": "{联系电话}"},
-                                                          {"propertyname": "emergencyContact", "value": "{紧急联系人}"},
-                                                          {"propertyname": "mergencyPeoplePhone",
-                                                           "value": "{紧急联系人电话}"}], "gpsType": 1}}
-
-response = requests.post(base_url, json=json)
-res = response.text
-print(res)
-```
-
-#### 5 成功截图
-
-![成功截图](https://s1.ax1x.com/2020/07/01/NomfVH.png)
-
+> 感谢你的使用，觉得可以的话，可不可以给个免费的star✨

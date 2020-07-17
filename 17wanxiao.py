@@ -1,27 +1,30 @@
 import time
+import datetime
 import json
 import requests
 
 
-base_url = "https://reportedh5.17wanxiao.com/sass/api/epmpics"
+check_url = "https://reportedh5.17wanxiao.com/sass/api/epmpics"
 
 text = input()
+deptId = eval(input())
 address = input()
 addtext = input()
-deptId = eval(input())
-userId = input()
+code = input()
 stuNum = input()
 userName = input()
 phoneNum = input()
+userId = input()
 emergency = input()
 emergencyPhone = input()
+sckey = input()
 
 
-area = {'address': address, 'text': addtext, 'code': "430321"}
+area = {'address': address, 'text': addtext, 'code': code}
 
 areaStr = json.dumps(area, ensure_ascii=False)
 
-json = {"businessType": "epmpics", "method": "submitUpInfo",
+jsons = {"businessType": "epmpics", "method": "submitUpInfo",
         "jsonData": {"deptStr": {"deptid": deptId, "text": text},
                      "areaStr": areaStr,
                      "reportdate": round(time.time()*1000), "customerid": "1999", "deptid": deptId, "source": "alipay",
@@ -41,6 +44,56 @@ json = {"businessType": "epmpics", "method": "submitUpInfo",
                                                           {"propertyname": "mergencyPeoplePhone",
                                                            "value": emergencyPhone}], "gpsType": 0}}
 
-response = requests.post(base_url, json=json)
-print(response.text)
+response = requests.post(check_url, json=jsons)
+res = json.dumps(response.json(), sort_keys=True, indent=4, ensure_ascii=False)
+print(res)
+print()
 
+SCKEY = sckey
+today = datetime.date.today()
+test_day = datetime.date(2020,12,19)
+date = (test_day - today).days
+desp = f"""
+------
+### 现在时间：
+```
+{time.strftime('%Y-%m-%d %H:%M:%S %p')}
+```
+### 打卡信息：
+```
+{res}
+```
+> 关于打卡信息
+>
+> 1、成功则打卡成功
+>
+> 2、系统异常则是打卡频繁
+
+### ⚡考研倒计时:
+```
+{date}天
+```
+
+>
+> [GitHub项目地址](https://github.com/ReaJason/17wanxiaoCheckin-Actions) 
+>
+>期待你给项目的star✨
+"""
+
+headers = {
+    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+}
+
+send_url = f"https://sc.ftqq.com/{SCKEY}.send"
+
+params = {
+    "text": f"完美校园健康打卡---{time.strftime('%H:%M:%S')}",
+    "desp": desp
+}
+
+# 发送消息
+response = requests.post(send_url, data=params, headers=headers)
+if response.json()["errmsg"] == 'success':
+        print("Server酱推送服务成功")
+else:
+        print("Something Wrong")

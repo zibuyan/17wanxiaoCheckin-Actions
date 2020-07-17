@@ -20,22 +20,24 @@ jobs:
         sudo apt update && \
         sudo apt install python3
       
-    - name: requirements
+    - name: Pip install requests
       run: |
-        pip3 install  -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
-        
-    - name: Checkin
+        pip3 install requests -i https://pypi.tuna.tsinghua.edu.cn/simple       
+         
+    - name: HealthCheckin
       run: |
         python3 17wanxiao.py <<EOF
         ${{secrets.TEXT}}
+        ${{secrets.DEPTID}}
         ${{secrets.ADDRESS}}
         ${{secrets.ADDTEXT}}
-        ${{secrets.DEPTID}}
-        ${{secrets.USERID}}
+        ${{secrets.CODE}}
         ${{secrets.STUNUM}}
         ${{secrets.USERNAME}}
         ${{secrets.PHONENUM}}
+        ${{secrets.USERID}}
         ${{secrets.EMERGENCY}}
         ${{secrets.EMERGENCYPHONE}}
+        ${{secrets.SCKEY}}
         EOF
         

@@ -47,17 +47,20 @@ jsons = {"businessType": "epmpics", "method": "submitUpInfo",
 response = requests.post(check_url, json=jsons)
 res = json.dumps(response.json(), sort_keys=True, indent=4, ensure_ascii=False)
 print(res)
-print()
+
 
 SCKEY = sckey
-today = datetime.date.today()
+
+now_time = datetime.now()
+bj_time = now_time - timedelta(hours=8)
+
 test_day = datetime.date(2020,12,19)
-date = (test_day - today).days
+date = (test_day - bj_time).days
 desp = f"""
 ------
 ### 现在时间：
 ```
-{time.strftime('%Y-%m-%d %H:%M:%S %p')}
+{bj_time.strftime("%Y-%m-%d %H:%M:%S %p")}
 ```
 ### 打卡信息：
 ```
@@ -87,7 +90,7 @@ headers = {
 send_url = f"https://sc.ftqq.com/{SCKEY}.send"
 
 params = {
-    "text": f"完美校园健康打卡---{time.strftime('%H:%M:%S')}",
+    "text": f"完美校园健康打卡---{bj_time.strftime('%H:%M:%S')}",
     "desp": desp
 }
 

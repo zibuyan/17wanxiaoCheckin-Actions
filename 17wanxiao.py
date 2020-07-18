@@ -52,7 +52,7 @@ print(res)
 SCKEY = sckey
 
 now_time = datetime.datetime.now()
-bj_time = now_time + timedelta(hours=8)
+bj_time = now_time + datetime.timedelta(hours=8)
 
 test_day = datetime.date(2020,12,19)
 date = (test_day - bj_time).days

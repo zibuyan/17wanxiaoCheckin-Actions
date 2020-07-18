@@ -1,6 +1,16 @@
 # 🏹17wanxiaoCheckin-Actions
 
-> 基于Github-Actions的完美校园健康打卡
+
+
+> 基于GitHub-Actions的完美校园健康打卡
+>
+> 每天早上六点自动打卡，微信推送打卡信息
+>
+> 图床使用：SM.MS -- https://sm.ms/
+>
+> 欢迎fork使用✨，交流学习
+
+
 
 ## 你可以在此项目中学到的东西
 
@@ -23,22 +33,22 @@
 - 绿化完成点击桌面图标启动
 - 拖动apk文件到模拟器窗口完成app的安装
 
-![](https://s1.ax1x.com/2020/07/18/UcEUKJ.png)
+![](https://i.loli.net/2020/07/18/Q5ikyFsXA1gpOz6.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcEdbR.png)
+![](https://i.loli.net/2020/07/18/GSpQnEM7Jfx8OaK.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcEtv4.png)
+![](https://i.loli.net/2020/07/18/Y7xnzh24se8f6WX.png)
 
 #### 2、httpcanary的配置及使用
 
 - 安装证书并移动到根目录
 - 设置目标应用为完美校园APP
 
-![](https://s1.ax1x.com/2020/07/18/UcViM4.png)
+![](https://i.loli.net/2020/07/18/VYSIl7DLqkb3w1x.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcV9RU.png)
+![](https://i.loli.net/2020/07/18/CsNoFP2nBJQH6Df.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcVpGT.png)
+![](https://i.loli.net/2020/07/18/1NUEcpAITgt9eMm.png)
 
 #### 3、开始抓包
 
@@ -47,7 +57,7 @@
 - 切换完美校园提交信息，打卡成功
 - 切换httpcanary，停止抓包
 
-![](https://s1.ax1x.com/2020/07/18/UcVFsJ.png)
+![](https://i.loli.net/2020/07/18/Lw5SOp1R9oeV4YQ.png)
 
 #### 4、抓包分析
 
@@ -57,7 +67,7 @@
 - 点击响应一栏，并在底部选择text，即可查看响应结果（成功则为打卡成功，打卡频繁则失败）
 - 至此我们就获得了我们绝大多数的数据了
 
-![](https://s1.ax1x.com/2020/07/18/UcVGdI.png)
+![](https://i.loli.net/2020/07/18/EczZY21WAQdgs5N.png)
 
 
 
@@ -74,15 +84,15 @@
 - 测试一下是否能推送成功，并复制下自己的SCKEY
 - 至此我们就获得了我们的最后一个数据，接下来就是了解如何使用此项目文件了
 
-![](https://s1.ax1x.com/2020/07/18/UcZE6g.png)
+![](https://i.loli.net/2020/07/18/LReTUqoZNirdX12.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcZVXQ.png)
+![](https://i.loli.net/2020/07/18/wvR9UjQum4OeyJM.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcZA1S.png)
+![](https://i.loli.net/2020/07/18/Pjkzg1i6hdIbWnH.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcZkp8.png)
+![](https://i.loli.net/2020/07/18/hj8q7flIvW4mwbE.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcZiff.png)
+![](https://i.loli.net/2020/07/18/kuMFjAKB45fWS6s.png)
 
 ### 三、项目fork与部署
 
@@ -92,9 +102,9 @@
 
 - 点击右上角的fork即可将项目文件拉到自己的库中
 
-![](https://s1.ax1x.com/2020/07/18/UcncB4.png)
+![](https://i.loli.net/2020/07/18/FCA6SNqcLyBg8Qe.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcngHJ.png)
+![](https://i.loli.net/2020/07/18/COrWqn8BcXZP6GT.png)
 
 #### 2、设置Secrets，输入项目运行的数据
 
@@ -120,11 +130,11 @@
   """
   ```
 
-![](https://s1.ax1x.com/2020/07/18/UcnWNR.png)
+![](https://i.loli.net/2020/07/18/vSkAs1hP6NU2Dce.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcnRE9.png)
+![](https://i.loli.net/2020/07/18/l6PTUNbJIMDGA4O.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcnIgK.png)
+![](https://i.loli.net/2020/07/18/5tNdbimDaqIUgYZ.png)
 
 #### 3、开启Actions
 
@@ -132,15 +142,15 @@
 
 - 回到项目主页，修改README.md触发Actions
 
-![](https://s1.ax1x.com/2020/07/18/Ucnx8P.png)
+![](https://i.loli.net/2020/07/18/HjxTdCnhuAgLqXy.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcnHDe.png)
+![](https://i.loli.net/2020/07/18/ZbcJ7LlhDgqtaId.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcnbHH.png)
+![](https://i.loli.net/2020/07/18/v9WufB8Znhk3wSt.png)
 
-![](https://s1.ax1x.com/2020/07/18/Ucn7uD.png)
+![](https://i.loli.net/2020/07/18/p7nj4ZAbId9cRSh.png)
 
-![](https://s1.ax1x.com/2020/07/18/UcuSv8.png)
+![](https://i.loli.net/2020/07/18/l87JNvr9fHceugU.png)
 
 #### 4、查看结果
 
@@ -149,9 +159,9 @@
 - 成功了一次之后则开启了自动化部署（每天早上六点自动打卡）
 - 如果失败，则在运行状况的HealthCheckin中查看报错情况，解决不了可以提issue
 
-![](https://s1.ax1x.com/2020/07/18/UcuCDg.png)
+![](https://i.loli.net/2020/07/18/OVmruRa6dIpqZfA.png)
 
-<img src="https://s1.ax1x.com/2020/07/18/Ucu9KS.jpg" style="zoom:33%;" />
+<img src="https://i.loli.net/2020/07/18/xGCrN6tdFBSiZgh.jpg" style="zoom:25%;" />
 
 ### 四、Actions具体流程
 

@@ -51,8 +51,8 @@ print(res)
 
 SCKEY = sckey
 
-now_time = datetime.now()
-bj_time = now_time - timedelta(hours=8)
+now_time = datetime.datetime.now()
+bj_time = now_time + timedelta(hours=8)
 
 test_day = datetime.date(2020,12,19)
 date = (test_day - bj_time).days
@@ -93,7 +93,7 @@ params = {
     "text": f"完美校园健康打卡---{bj_time.strftime('%H:%M:%S')}",
     "desp": desp
 }
-
+    
 # 发送消息
 response = requests.post(send_url, data=params, headers=headers)
 if response.json()["errmsg"] == 'success':

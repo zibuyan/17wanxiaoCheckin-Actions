@@ -54,7 +54,7 @@ SCKEY = sckey
 now_time = datetime.datetime.now()
 bj_time = now_time + datetime.timedelta(hours=8)
 
-test_day = datetime.date(2020,12,19)
+test_day = datetime.datetime.strptime('2020-12-19 00:00:00','%Y-%m-%d %H:%M:%S')
 date = (test_day - bj_time).days
 desp = f"""
 ------

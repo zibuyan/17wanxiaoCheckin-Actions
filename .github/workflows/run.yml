@@ -22,7 +22,7 @@ jobs:
       
     - name: Pip install requests
       run: |
-        pip3 install requests -i https://pypi.tuna.tsinghua.edu.cn/simple       
+        pip3 install requests      
          
     - name: HealthCheckin
       run: |
